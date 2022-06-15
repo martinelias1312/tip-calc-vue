@@ -79,6 +79,7 @@ button {
 
     &:focus {
       outline: 2px solid $color-primary-Strong-cyan;
+      color: $color-Very-dark-cyan;
     }
   }
 }
@@ -173,10 +174,6 @@ button {
   color: $color-Very-dark-cyan;
   background: $color-primary-Strong-cyan;
   padding: 0.5em 0;
-
-  &:disabled {
-    cursor: auto;
-  }
 }
 
 /* Footer */
@@ -197,8 +194,27 @@ footer {
   color: $color-Very-dark-cyan;
 }
 
-.display {
-  display: none;
+.disabled {
+  color: hsla(183.1, 100%, 15.1%, 0.38);
+  background: hsla(171.8, 67%, 45.1%, 0.31);
+
+  &:hover {
+    background: hsla(171.8, 67%, 45.1%, 0.31);
+    color: hsla(183.1, 100%, 15.1%, 0.38);
+    cursor: auto;
+  }
+}
+
+// hiding input type number arrows from mozzila and chrome
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+  margin: 0;
+}
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 /*
  *	MEDIA QUERIES

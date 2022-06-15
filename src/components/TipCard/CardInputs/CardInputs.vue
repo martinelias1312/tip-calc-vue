@@ -13,11 +13,11 @@
     <section className="tip">
       <h2>Select Tip %</h2>
       <div className="btn-grid">
-        <button value="5" @click="tipChanged">5%</button>
-        <button value="10" @click="tipChanged">10%</button>
-        <button value="15" @click="tipChanged">15%</button>
-        <button value="25" @click="tipChanged">25%</button>
-        <button value="50" @click="tipChanged">50%</button>
+        <button class="btn" value="5" @click="tipChanged">5%</button>
+        <button class="btn" value="10" @click="tipChanged">10%</button>
+        <button class="btn" value="15" @click="tipChanged">15%</button>
+        <button class="btn" value="25" @click="tipChanged">25%</button>
+        <button class="btn" value="50" @click="tipChanged">50%</button>
         <input
           type="number"
           className="btn-custom"
@@ -38,10 +38,6 @@
         v-model="people"
         @input="dataChanged"
       />
-      bill:{{ bill }} people:{{ people }} tip:{{ tip }} personTip:{{
-        personTip
-      }}
-      personTotal:{{ personTotal }}
     </section>
   </div>
 </template>
@@ -63,6 +59,13 @@ export default {
     tipChanged(e) {
       this.tip = e.target.value;
       this.dataChanged();
+
+      //btn styling on click
+      let tipBtns = document.querySelectorAll("button");
+      tipBtns.forEach((btn) => btn.classList.remove("activeBtn"));
+      if (e.target.className == "btn") {
+        e.target.classList.add("activeBtn");
+      }
     },
     dataChanged() {
       if (this.people !== null && this.bill !== null && this.people !== "") {

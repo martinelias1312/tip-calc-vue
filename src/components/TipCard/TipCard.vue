@@ -3,8 +3,9 @@
     <CardInputs
       @personTip="personTip = $event"
       @personTotal="personTotal = $event"
+      @resetActive="reset = $event"
     />
-    <TipSummary :tip="personTip" :total="personTotal" />
+    <TipSummary :tip="personTip" :total="personTotal" :resetActive="reset" />
   </main>
 </template>
 
@@ -21,6 +22,7 @@ export default {
     return {
       personTip: 0,
       personTotal: 0,
+      reset: false,
     };
   },
 };

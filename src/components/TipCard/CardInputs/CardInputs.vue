@@ -53,6 +53,7 @@ export default {
       tip: null,
       personTip: 0,
       personTotal: 0,
+      isTyping: false,
     };
   },
   methods: {
@@ -75,8 +76,15 @@ export default {
         this.personTip = 0;
         this.personTotal = 0;
       }
+
+      //is any data inserted ?
+      if (this.people !== null || this.bill !== null || this.people !== "") {
+        this.isTyping = true;
+      } else this.isTyping = false;
+
       this.$emit("personTip", this.personTip);
       this.$emit("personTotal", this.personTotal);
+      this.$emit("resetActive", this.isTyping);
     },
   },
 };

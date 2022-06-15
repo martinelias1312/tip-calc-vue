@@ -6,66 +6,23 @@
         type="number"
         placeholder="0"
         v-model="bill"
-        @input="valueChanged"
+        @input="dataChanged"
       />
     </section>
 
     <section className="tip">
       <h2>Select Tip %</h2>
       <div className="btn-grid">
-        <button
-          value="5"
-          @click="
-            valueChanged;
-            tipChanged;
-          "
-        >
-          5%
-        </button>
-        <button
-          value="10"
-          @click="
-            valueChanged;
-            tipChanged;
-          "
-        >
-          10%
-        </button>
-        <button
-          value="15"
-          @click="
-            valueChanged;
-            tipChanged;
-          "
-        >
-          15%
-        </button>
-        <button
-          value="25"
-          @click="
-            valueChanged;
-            tipChanged;
-          "
-        >
-          25%
-        </button>
-        <button
-          value="50"
-          @click="
-            valueChanged;
-            tipChanged;
-          "
-        >
-          50%
-        </button>
+        <button value="5" @click="tipChanged">5%</button>
+        <button value="10" @click="tipChanged">10%</button>
+        <button value="15" @click="tipChanged">15%</button>
+        <button value="25" @click="tipChanged">25%</button>
+        <button value="50" @click="tipChanged">50%</button>
         <input
           type="number"
           className="btn-custom"
           placeholder="Custom"
-          @input="
-            valueChanged;
-            tipChanged;
-          "
+          @input="tipChanged"
         />
       </div>
     </section>
@@ -79,8 +36,12 @@
         type="number"
         placeholder="0"
         v-model="people"
-        @input="valueChanged"
-      />{{ personTip }}||{{ personTotal }}
+        @input="dataChanged"
+      />
+      bill:{{ bill }} people:{{ people }} tip:{{ tip }} personTip:{{
+        personTip
+      }}
+      personTotal:{{ personTotal }}
     </section>
   </div>
 </template>
@@ -89,24 +50,31 @@
 // style
 import "@/assets/scss/main.scss";
 export default {
+  data() {
+    return {
+      bill: null,
+      people: null,
+      tip: null,
+      personTip: 0,
+      personTotal: 0,
+    };
+  },
   methods: {
     tipChanged(e) {
       this.tip = e.target.value;
-      this.valueChanged();
+      this.dataChanged();
     },
-    valueChanged() {
-      this.personTip = (this.bill * (this.tip / 100)) / this.people;
-      this.personTotal = this.bill / this.people + this.personTip;
+    dataChanged() {
+      if (this.people !== null && this.bill !== null && this.people !== "") {
+        this.personTip = (this.bill * (this.tip / 100)) / this.people;
+        this.personTotal = this.bill / this.people + this.personTip;
+      } else {
+        this.personTip = 0;
+        this.personTotal = 0;
+      }
+      this.$emit("personTip", this.personTip);
+      this.$emit("personTotal", this.personTotal);
     },
-  },
-  data() {
-    return {
-      people: null,
-      bill: null,
-      tip: null,
-      personTotal: 0,
-      personTip: 0,
-    };
   },
 };
 </script>

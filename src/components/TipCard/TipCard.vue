@@ -1,7 +1,10 @@
 <template>
   <main className="tip-card">
-    <CardInputs />
-    <TipSummary />
+    <CardInputs
+      @personTip="personTip = $event"
+      @personTotal="personTotal = $event"
+    />
+    <TipSummary :tip="personTip" :total="personTotal" />
   </main>
 </template>
 
@@ -13,6 +16,12 @@ export default {
   components: {
     CardInputs,
     TipSummary,
+  },
+  data() {
+    return {
+      personTip: 0,
+      personTotal: 0,
+    };
   },
 };
 </script>

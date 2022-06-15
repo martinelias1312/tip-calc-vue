@@ -3,27 +3,69 @@
     <section className="bill">
       <h2>Bill</h2>
       <input
-        type="text"
+        type="number"
         placeholder="0"
-        onChange="{handleInput}"
-        ref="{billInput}"
+        v-model="bill"
+        @input="valueChanged"
       />
     </section>
 
     <section className="tip">
       <h2>Select Tip %</h2>
       <div className="btn-grid">
-        <button onClick="{handleClick}">5%</button>
-        <button onClick="{handleClick}">10%</button>
-        <button onClick="{handleClick}">15%</button>
-        <button onClick="{handleClick}">25%</button>
-        <button onClick="{handleClick}">50%</button>
+        <button
+          value="5"
+          @click="
+            valueChanged;
+            tipChanged;
+          "
+        >
+          5%
+        </button>
+        <button
+          value="10"
+          @click="
+            valueChanged;
+            tipChanged;
+          "
+        >
+          10%
+        </button>
+        <button
+          value="15"
+          @click="
+            valueChanged;
+            tipChanged;
+          "
+        >
+          15%
+        </button>
+        <button
+          value="25"
+          @click="
+            valueChanged;
+            tipChanged;
+          "
+        >
+          25%
+        </button>
+        <button
+          value="50"
+          @click="
+            valueChanged;
+            tipChanged;
+          "
+        >
+          50%
+        </button>
         <input
+          type="number"
           className="btn-custom"
           placeholder="Custom"
-          onChange="{handleInput}"
-          ref="{customInput}"
-          onClick="{handleClick}"
+          @input="
+            valueChanged;
+            tipChanged;
+          "
         />
       </div>
     </section>
@@ -31,14 +73,14 @@
     <section className="people">
       <h2>
         Number of People
-        <p className="msg-zero display">Can´t be zero</p>
+        <p className="msg-zero" v-if="people === 0">Can´t be zero</p>
       </h2>
       <input
-        type="text"
+        type="number"
         placeholder="0"
-        onChange="{handleInput}"
-        ref="{peopleInput}"
-      />
+        v-model="people"
+        @input="valueChanged"
+      />{{ personTip }}||{{ personTotal }}
     </section>
   </div>
 </template>
@@ -46,5 +88,25 @@
 <script>
 // style
 import "@/assets/scss/main.scss";
-export default {};
+export default {
+  methods: {
+    tipChanged(e) {
+      this.tip = e.target.value;
+      this.valueChanged();
+    },
+    valueChanged() {
+      this.personTip = (this.bill * (this.tip / 100)) / this.people;
+      this.personTotal = this.bill / this.people + this.personTip;
+    },
+  },
+  data() {
+    return {
+      people: null,
+      bill: null,
+      tip: null,
+      personTotal: 0,
+      personTip: 0,
+    };
+  },
+};
 </script>

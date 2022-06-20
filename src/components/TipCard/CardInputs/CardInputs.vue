@@ -67,9 +67,19 @@ export default {
       if (e.target.className == "btn") {
         e.target.classList.add("activeBtn");
       }
+      //input reset if click on buttons
+      let input = document.querySelector(".btn-custom");
+      if (e.target.localName === "button") {
+        input.value = "";
+      }
     },
     dataChanged() {
-      if (this.people !== null && this.bill !== null && this.people !== "") {
+      if (
+        this.people !== null &&
+        this.bill !== null &&
+        this.people !== "" &&
+        this.people !== 0
+      ) {
         this.personTip = (this.bill * (this.tip / 100)) / this.people;
         this.personTotal = this.bill / this.people + this.personTip;
       } else {

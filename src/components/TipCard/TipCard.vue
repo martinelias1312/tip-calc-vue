@@ -4,8 +4,14 @@
       @personTip="personTip = $event"
       @personTotal="personTotal = $event"
       @resetActive="reset = $event"
+      :reseting="reseting"
     />
-    <TipSummary :tip="personTip" :total="personTotal" :resetActive="reset" />
+    <TipSummary
+      :tip="personTip"
+      :total="personTotal"
+      :resetActive="reset"
+      @reseting="reseting = $event"
+    />
   </main>
 </template>
 
@@ -23,6 +29,7 @@ export default {
       personTip: 0,
       personTotal: 0,
       reset: false,
+      reseting: false,
     };
   },
 };

@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     reseting() {
-      this.$emit("reseting", "true");
+      this.$emit("reseting", true);
     },
   },
 };

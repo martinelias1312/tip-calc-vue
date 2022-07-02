@@ -12,7 +12,7 @@
     <button
       class="btn-reset"
       :class="{ disabled: !resetActive }"
-      @click="reseting"
+      @click="$emit('reseting', true)"
     >
       RESET
     </button>
@@ -32,11 +32,6 @@ export default {
     },
     resetActive: {
       type: Boolean,
-    },
-  },
-  methods: {
-    reseting() {
-      this.$emit("reseting", true);
     },
   },
 };

@@ -9,7 +9,13 @@
       <h2 className="tip-total-heading">Total<span>/ person</span></h2>
       <p className="tip-total-sum">${{ total.toFixed(2) }}</p>
     </div>
-    <button class="btn-reset" :class="{ disabled: !resetActive }">RESET</button>
+    <button
+      class="btn-reset"
+      :class="{ disabled: !resetActive }"
+      @click="reseting"
+    >
+      RESET
+    </button>
   </div>
 </template>
 
@@ -26,6 +32,11 @@ export default {
     },
     resetActive: {
       type: Boolean,
+    },
+  },
+  methods: {
+    reseting() {
+      this.$emit("reseting", "true");
     },
   },
 };
